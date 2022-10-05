@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from random import random
 
-form_class = uic.loadUiType("pyqt05.ui")[0]
+form_class = uic.loadUiType("pyqt08.ui")[0]
 
 class MyWindow(QMainWindow, form_class):
     def __init__(self):
@@ -12,23 +12,24 @@ class MyWindow(QMainWindow, form_class):
         self.pb.clicked.connect(self.myclick)    # 클릭 시 실행할 function
     
     def myclick(self):
-        mine = self.leMine.text()
-        rnd = random()*3
-        com = ""
-        result = ""
+        first = self.le_first.text()
+        last = self.le_last.text()
         
-        if rnd > 1:
-            com = "홀"
-        else:
-            com = "짝"
-            
-        if mine == com:
-            result = "승리"
-        else:
-            result = "패배"
-            
-        self.leCom.setText(com)
-        self.leResult.setText(result)
+        first = int(first)
+        last = int(last)
+        str = ""
+        
+        for i in range(first, last+1):
+            str += self.countOfStar(i) + "\n"
+    
+        self.te.setText(str)
+    
+    
+    def countOfStar(self, cnt):
+        str = ""
+        for i in range(cnt):
+            str += "*"
+        return str
         
 if __name__ == "__main__":
     app = QApplication(sys.argv)
