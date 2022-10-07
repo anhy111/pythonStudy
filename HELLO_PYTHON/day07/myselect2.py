@@ -5,7 +5,6 @@ cur = conn.cursor(pymysql.cursors.DictCursor)    # 커서생성
 
 sql = "select * from emp"    # 실행할 sql문
 cur.execute(sql)
-
 result = cur.fetchall()
 print(result)
 

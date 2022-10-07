@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+EMP_MOD_ACT
+<script type="text/javascript">
+	var cnt = '{{result}}'
+	if(cnt > 0){
+		alert("정상적으로 삭제되었습니다.");
+		location.href = "emp_list";
+	} else{
+		//history.go(-1);
+		history.back();
+	}
+</script>
+</body>
+</html>
