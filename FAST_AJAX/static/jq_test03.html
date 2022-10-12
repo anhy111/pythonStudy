@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/static/js/jquery-3.6.1.js"></script>
+<style type="text/css">
+	.myit{
+		width: 20px
+	}
+</style>
+<script type="text/javascript">
+	function fn_plus(){
+		$("#it3").val(function(){
+			var it1 = parseInt($("#it1").val());
+			var it2 = parseInt($("#it2").val());
+			return it1 + it2
+		})
+	}
+	
+	function fn_minus(){
+		$("#it3").val(function(){
+			return $("#it1").val() - $("#it2").val();
+		})
+	}
+	
+	function fn_multiply(){
+		$("#it3").val(function(){
+			return $("#it1").val() * $("#it2").val();
+		})
+	}
+	
+	function fn_divide(){
+		$("#it3").val(function(){
+			return $("#it1").val() / $("#it2").val();
+		})
+	}
+	
+	$(document).ready(function(){
+		$("#btnPls").bind("click",function(){
+			fn_plus();
+		})
+		$("#btnMus").bind("click",function(){
+			fn_minus();
+		})
+		$("#btnMul").bind("click",function(){
+			fn_multiply();
+		})
+		$("#btnDiv").bind("click",function(){
+			fn_divide();
+		})
+	})
+</script>
+</head>
+<body>
+	<table border="1px">
+		<tr>
+			<td>
+				<input type="text" class="myit" id="it1">
+			</td>
+			<td>
+				<input type="button" id="btnPls" value="plus" /><br/>
+				<input type="button" id="btnMus" value="minus" /><br/>
+				<input type="button" id="btnMul" value="multiply" /><br/>
+				<input type="button" id="btnDiv" value="divide" /><br/>
+			</td>
+			<td>
+				<input type="text" class="myit" id="it2">
+			</td>
+			<td>
+				=
+			</td>
+			<td>
+				<input type="text" class="myit" id="it3" readonly="readonly">				
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

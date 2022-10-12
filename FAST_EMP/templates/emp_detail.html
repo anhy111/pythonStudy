@@ -8,12 +8,16 @@
 		location.href = "emp_mod?e_id={{emp['e_id']}}";
 	}
 	function fn_del(){
-		location.href = "emp_del_act?e_id={{emp['e_id']}}";
+		//location.href = "emp_del_act?e_id={{emp['e_id']}}";
+		document.frm.submit();
 	}
 </script>
 </head>
 <body>
 EMP_DETAIL
+<form id="frm" name="frm" action="emp_del_act" method="post">
+<input type="hidden" name="e_id" value="{{emp['e_id']}}">
+</form>
 <table border="1">
 	<tr>
 		<th>id</th>

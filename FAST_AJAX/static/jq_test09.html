@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/static/js/jquery-3.6.1.js"></script>
+<style type="text/css">
+	#it{
+		width: 100px;
+		text-align: right;
+	}
+	table{
+		text-align: center;
+		height: 200px;
+	}
+</style>
+<script type="text/javascript">
+	function myclick(e){
+		$("#it").val(function(p_inx,str_old){
+			console.log(str_old);
+			var obj = e.target;
+			var str_new = obj.value;
+			
+			return str_old + str_new;
+		});
+	}
+
+	function myCall(){
+		$("#it").val(function(){
+			alert("Calling\n"+it.value);
+		});
+	}
+	
+	$(document).ready(function(){
+		var $it = $("#it");
+		for(let i=0; i<10; i++){
+			$("#btn"+i).bind("click",function(event){
+				// - 추가하기
+				let val = $it.val();
+				if(val.length == 3 || val.length == 8){
+					$it.val(function(p_inx,p_val){
+						return p_val + "-";
+					});
+				}// end if
+				myclick(event);
+			});// end bind()
+		}// end for
+
+		
+		// - 포함 지우기
+		$("#btnx").bind("click",function(){
+			$it.val(function(p_inx, p_val){
+				if(p_val.length == 5 || p_val.length == 10){
+					return p_val.slice(0,p_val.length-2);					
+				} else{
+					return p_val.slice(0,p_val.length-1);					
+				}
+			}); // end $it.val
+		}); //end btnx
+		
+		
+		$("#btn_call").bind("click",function(){
+			myCall();
+		});
+	}); // end ready
+</script>
+</head>
+<body>
+<table border="1px">
+	<tr>
+		<td colspan="3">
+			<input type="text" id="it">
+			<input type="button" id="btnx" value="x">
+		</td>
+	</tr>
+	<tr>
+		<td><input type="button" id="btn1" value="1"></td>
+		<td><input type="button" id="btn2" value="2"></td>
+		<td><input type="button" id="btn3" value="3"></td>
+	</tr>
+	<tr>
+		<td><input type="button" id="btn4" value="4"></td>
+		<td><input type="button" id="btn5" value="5"></td>
+		<td><input type="button" id="btn6" value="6"></td>
+	</tr>                                          
+	<tr>                                           
+		<td><input type="button" id="btn7" value="7"></td>
+		<td><input type="button" id="btn8" value="8"></td>
+		<td><input type="button" id="btn9" value="9"></td>
+	</tr>
+	<tr>                                           
+		<td><input type="button" id="btn0" value="0"></td>
+		<td colspan="2">	
+			<input type="button" id="btn_call" value="CALL" />
+		</td>
+	</tr>
+	
+</table>
+</body>
+</html>

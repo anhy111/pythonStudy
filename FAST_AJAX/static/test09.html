@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#it{
+		width: 100px;
+		text-align: right;
+	}
+	table{
+		text-align: center;
+		height: 200px;
+	}
+</style>
+<script type="text/javascript">
+	function myclk(e){
+		var obj_it = document.querySelector("#it");
+		var obj = e.target;
+		var str_new = obj.value;
+		var str_old = obj_it.value;
+		
+		obj_it.value = str_old + str_new;
+	}
+
+	function myclick(){
+		var it = document.querySelector("#it");
+		alert("Calling\n"+it.value);
+		it.value = "";
+	}
+	
+	window.onload = function(){
+		var it = document.querySelector("#it");
+		for(let i=0; i<10; i++){
+			document.querySelector("#btn"+i)
+				.addEventListener("click",function(){
+					
+					// - 추가하기
+					if(it.value.length == 3 || it.value.length == 8){
+						it.value += "-";
+					}
+					it.value += i;
+				});
+		}
+		
+		// - 포함 지우기
+		document.querySelector("#btnx")
+			.addEventListener("click",function(){
+				var str = it.value
+				if(str.length == 5 || str.length == 10){
+					it.value = str.slice(0,str.length-2);					
+				} else{
+					it.value = str.slice(0,str.length-1);					
+				}
+			});
+	
+	}
+</script>
+</head>
+<body>
+<table border="1px">
+	<tr>
+		<td colspan="3">
+			<input type="text" id="it">
+			<input type="button" id="btnx" value="x">
+		</td>
+	</tr>
+	<tr>
+		<td><input type="button" id="btn1" value="1"></td>
+		<td><input type="button" id="btn2" value="2"></td>
+		<td><input type="button" id="btn3" value="3"></td>
+	</tr>
+	<tr>
+		<td><input type="button" id="btn4" value="4"></td>
+		<td><input type="button" id="btn5" value="5"></td>
+		<td><input type="button" id="btn6" value="6"></td>
+	</tr>                                          
+	<tr>                                           
+		<td><input type="button" id="btn7" value="7"></td>
+		<td><input type="button" id="btn8" value="8"></td>
+		<td><input type="button" id="btn9" value="9"></td>
+	</tr>
+	<tr>                                           
+		<td><input type="button" id="btn0" value="0" onclick="myclk()"></td>
+		<td colspan="2">	
+			<input type="button" id="btn_call" value="CALL" onclick="myclick()">
+		</td>
+	</tr>
+	
+</table>
+</body>
+</html>

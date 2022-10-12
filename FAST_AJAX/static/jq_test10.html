@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/static/js/jquery-3.6.1.js"></script>
+<style type="text/css">
+	#it{
+		width: 30px;
+	}
+</style>
+<script type="text/javascript">
+	var com = "";
+	
+	window.onload = function(){
+		ranNum();	
+	}
+	
+	function ranNum(){
+		var arr = [0,1,2,3,4,5,6,7,8,9];
+		
+		for(let i=0; i<50; i++){
+			ran = Math.floor(Math.random()*10);
+			let temp = arr[ran];
+			arr[ran] = arr[0];
+			arr[0] = temp;
+		}
+		com = "" + arr[0] + arr[1] + arr[2];
+		console.log(com);
+	}
+	
+	function reset(){
+		$("#it").val("");
+		$("#ta").html("");
+		ranNum();
+	}
+	
+	function myclick(){
+		$("#ta").html(function(p_inx, p_html){
+			var $mine = $("#it");
+			var mine = $mine.val();
+			var stk = strike(mine);
+			var bl = ball(mine);
+			p_html += mine +" " + stk + "S" + bl + "B\n";
+			if(stk == 3){
+				p_html += "게임종료";
+			}
+			
+			$mine.val("");
+			
+			return p_html;
+		});
+	}
+	
+	function ball(p_mine){
+		var cnt = 0;
+		
+		if(com[0] == p_mine[1] || com[0] == p_mine[2]) cnt++;
+		if(com[1] == p_mine[0] || com[1] == p_mine[2]) cnt++;
+		if(com[2] == p_mine[0] || com[2] == p_mine[1]) cnt++;
+		
+		return cnt;
+	}
+	
+	function strike(p_mine){
+		var cnt = 0;
+		if(com[0] == p_mine[0]) cnt++;
+		if(com[1] == p_mine[1]) cnt++;
+		if(com[2] == p_mine[2]) cnt++;
+		
+		return cnt;
+	}
+	
+	$(document).ready(function(){
+		$("#btn1").bind("click",function(){
+			myclick();
+		});
+		$("#btn2").bind("click",function(){
+			reset();
+		});
+	})
+	
+</script>
+</head>
+<body>
+<table border="1px">
+	<tr>
+		<td>스트라이크:</td>
+		<td>
+			<input type="text" id="it">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input style="width: 58%;" type="button" value="맞추기" id="btn1" />
+			<input style="width: 38%;" type="button" value="리셋" id="btn2" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<textarea id="ta" rows="20" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

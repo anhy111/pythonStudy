@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/static/js/jquery-3.6.1.js"></script>
+
+<script type="text/javascript">
+	function myclick(){
+		var arr45 = [];
+		for(let i=0; i<45; i++){
+			arr45.push(i+1);
+		}
+		
+		for(let i=0; i<100; i++){
+			let ran = Math.floor(Math.random()*45);
+			
+			let temp = arr45[ran]
+			arr45[ran] = arr45[0]
+			arr45[0] = temp;
+		}
+		
+		$(".mydiv").html(function(p_inx, p_html){
+			return arr45[p_inx];
+		})
+	}
+
+	$(document).ready(function(){
+		$("#btn").bind("click",function(){
+			myclick();
+		});
+	});
+	
+</script>
+</head>
+<body>
+<table border="1px">
+	<tr>
+		<td><div class="mydiv">__</div></td>
+		<td><div class="mydiv">__</div></td>
+		<td><div class="mydiv">__</div></td>
+		<td><div class="mydiv">__</div></td>
+		<td><div class="mydiv">__</div></td>
+		<td><div class="mydiv">__</div></td>
+	</tr>
+	<tr>
+		<td colspan="6">
+			<input type="button" id="btn" value="로또생성하기"/>
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>

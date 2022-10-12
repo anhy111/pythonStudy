@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	function myclick(){
+		let v_sel = document.querySelector("#mysel").value;
+		let v_ta = document.querySelector("#myta");
+		
+		let txt = "";
+		txt += `${v_sel} * ${1} = ${v_sel * 1}\n`;
+		txt += `${v_sel} * ${2} = ${v_sel * 2}\n`;
+		txt += `${v_sel} * ${3} = ${v_sel * 3}\n`;
+		txt += `${v_sel} * ${4} = ${v_sel * 4}\n`;
+		txt += `${v_sel} * ${5} = ${v_sel * 5}\n`;
+		txt += `${v_sel} * ${6} = ${v_sel * 6}\n`;
+		txt += `${v_sel} * ${7} = ${v_sel * 7}\n`;
+		txt += `${v_sel} * ${8} = ${v_sel * 8}\n`;
+		txt += `${v_sel} * ${9} = ${v_sel * 9}\n`;
+		
+		v_ta.innerHTML = txt;
+	}
+	
+
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td>출력단수</td>
+		<td>
+			<select id="mysel" onchange="change(this.value)">
+				<option value="2" selected>2단</option>
+				<option value="3">3단</option>
+				<option value="4">4단</option>
+				<option value="5">5단</option>
+				<option value="6">6단</option>
+				<option value="7">7단</option>
+				<option value="8">8단</option>
+				<option value="9">9단</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" value="구구단출력하기" onclick="myclick()">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<textarea id="myta" rows="20" cols="20"></textarea>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

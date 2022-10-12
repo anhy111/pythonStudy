@@ -41,6 +41,12 @@ async def emp_del_act(request: Request, e_id : str):
     result = ed.delete(e_id)
     return templates.TemplateResponse("emp_del_act.html", {"request": request, "result":result})
 
+@app.post("/emp_del_act", response_class=HTMLResponse)
+async def emp_del_act_post(request: Request,e_id: str = Form('e_id')):
+    ed = EmpDao()
+    result = ed.delete(e_id)
+    return templates.TemplateResponse("emp_del_act.html", {"request": request, "result":result})
+
 @app.get('/emp_add', response_class=HTMLResponse)
 async def emp_add(request: Request):
     return templates.TemplateResponse("emp_add.html", {"request": request})

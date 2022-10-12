@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/static/js/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+// 	$("input[type='button']").click(fn_change);
+
+// 	function fn_change(){
+// 		$("#mydiv").html(function(p_inx, p_html){
+// 			if(p_html == "Good Morning"){
+// 				return "Good Evening";
+// 			} else{
+// 				return "Good Morning";
+// 			}
+// 		})
+// 	}
+
+	function myclick(){
+		$("#mydiv").html("Good Evening");
+	}
+	
+	$(document).ready(function(){
+		$("#btn").bind("click",function(){
+			myclick()
+		})
+	})
+</script>
+</head>
+<body>
+<div id="mydiv">Good Morning</div>
+<input id="btn" type="button" value="click">
+
+</body>
+</html>

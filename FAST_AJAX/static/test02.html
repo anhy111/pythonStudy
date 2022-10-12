@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function myclick(){
+		var v_it = document.querySelector("#it");
+		v_it.value = v_it.value-0 + 3;
+	}
+	function myclick2(){
+		var v_it = document.querySelector("#it");
+		v_it.value = v_it.value-0 - 3;
+	}
+</script>
+</head>
+<body>
+<input type="text" id="it" value="200"/> 
+<input type="button" value="plus3" onclick="myclick()" />
+<input type="button" value="minus3" onclick="myclick2()" />
+</body>
+</html>
