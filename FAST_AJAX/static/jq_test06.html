@@ -6,27 +6,28 @@
 <script src="/static/js/jquery-3.6.1.js"></script>
 <script type="text/javascript">
 
-	function myclick(){
+	function myclick($myta, $mysel){
+		let v_sel = $mysel.val();
+		let txt = "";
+		txt += `${v_sel} * ${1} = ${v_sel * 1}\n`;
+		txt += `${v_sel} * ${2} = ${v_sel * 2}\n`;
+		txt += `${v_sel} * ${3} = ${v_sel * 3}\n`;
+		txt += `${v_sel} * ${4} = ${v_sel * 4}\n`;
+		txt += `${v_sel} * ${5} = ${v_sel * 5}\n`;
+		txt += `${v_sel} * ${6} = ${v_sel * 6}\n`;
+		txt += `${v_sel} * ${7} = ${v_sel * 7}\n`;
+		txt += `${v_sel} * ${8} = ${v_sel * 8}\n`;
+		txt += `${v_sel} * ${9} = ${v_sel * 9}\n`;
 		
-		$("#myta").html(function(p_inx, p_html){
-			let v_sel = $("#mysel").val();
-			let txt = "";
-			txt += `${v_sel} * ${1} = ${v_sel * 1}\n`;
-			txt += `${v_sel} * ${2} = ${v_sel * 2}\n`;
-			txt += `${v_sel} * ${3} = ${v_sel * 3}\n`;
-			txt += `${v_sel} * ${4} = ${v_sel * 4}\n`;
-			txt += `${v_sel} * ${5} = ${v_sel * 5}\n`;
-			txt += `${v_sel} * ${6} = ${v_sel * 6}\n`;
-			txt += `${v_sel} * ${7} = ${v_sel * 7}\n`;
-			txt += `${v_sel} * ${8} = ${v_sel * 8}\n`;
-			txt += `${v_sel} * ${9} = ${v_sel * 9}\n`;
-			return txt
-		});
+		$myta.html(txt);
 	}
 	
 	$(document).ready(function(){
+		let $myta = $("#myta");
+		let $mysel = $("#mysel");
+		
 		$("#btn").bind("click",function(){
-			myclick();
+			myclick($myta, $mysel);
 		});
 	});
 

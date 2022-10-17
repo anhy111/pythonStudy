@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/static/js/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+
+	var $tbody; 
+	var $img;
+	var flag_ing = true;
+	var remain = 16;
+	
+	var s1i = -1;
+	var s1j = -1;
+	var s1v = -1;
+	var s2i = -1;
+	var s2j = -1;
+	var s2v = -1;
+	
+	var oneClick;
+	var twoClick;
+	
+	var step = 0;
+	var flagover = 0;
+	$(document).ready(function(){
+		$tbody = $("#mytbody");
+		$img = $("img");
+	});
+	
+	var img2D = [
+		[1,1,2,2],
+		[3,3,4,4],
+		[5,5,6,6],
+		[7,7,8,8]
+	];
+	
+	var cvr2D = [
+		[0,0,0,0],
+		[0,0,0,0],
+		[0,0,0,0],
+		[0,0,0,0]
+	];
+	
+	var disp2D = [
+		[0,0,0,0],
+		[0,0,0,0],
+		[0,0,0,0],
+		[0,0,0,0]
+	];
+	
+	function myinit(){
+// 		shuffle();
+		patchIJEvent();
+	}
+
+	function setDisp2D(){
+		for(let i=0; i<cvr2D.length; i++){
+			for(let j=0; j<cvr2D[i].length; j++){
+				if(cvr2D[i][j] == 1){
+					disp2D[i][j] = img2D[i][j];
+				} else{
+					disp2D[i][j] = 0;
+				}
+			}
+		}
+
+		if(step == 0){
+			disp2D[s1i][s1j] = s1v;
+		}
+		if(step == 1){
+			disp2D[s1i][s1j] = s1v;
+			disp2D[s2i][s2j] = s2v;
+		}
+	}
+	
+	function myclick(e){
+		
+		if(!flag_ing){
+			return;
+		}
+		if(step == 2){
+			return;
+		}
+		
+		var arr2 = e.target.alt.split(",");
+		var i = parseInt(arr2[0]);
+		var j = parseInt(arr2[1]);
+
+		if(step == 0){
+			s1i = i;
+			s1j = j;
+			s1v = img2D[i][j];
+		}
+		if(step == 1){
+			if(i == s1i && j == s1j){
+				return;
+			}
+			s2i = i;
+			s2j = j;
+			s2v = img2D[i][j];
+		}
+		
+		setDisp2D();
+		
+		render();
+		nextStep();
+		
+		if(step == 2){
+			setTimeout(goStep3,500);
+		}
+	}
+	
+	function goStep3(){
+		
+		if(s1v == s2v && (s1i != s2i || s1j != s2j)){
+			cvr2D[s1i][s1j] = 1;
+			cvr2D[s2i][s2j] = 1;
+			$("#mydisp").html(remain-=2);
+		}
+		
+		s1i = -1;
+		s1j = -1;
+		s1v = -1;
+		s2i = -1;
+		s2j = -1;
+		s2v = -1;
+		
+		var cnt_final = 0;
+		for(let i=0; i<cvr2D.length; i++){
+			for(let j=0; j<cvr2D.length; j++){
+				if(cvr2D[i][j] == 1){
+					cnt_final++;
+				}
+			}
+		}
+		if(cnt_final == 16){
+			alert("게임 오버");
+			flag_ing = false;
+		}
+		
+		setDisp2D();
+		render();
+		
+		nextStep();
+		console.log(cvr2D);
+	}
+	
+	function nextStep(){
+		
+		step++;
+		if(step > 2){
+			step = 0;
+		}
+	}
+	
+	
+// 	function strike(e){
+// 		if(oneClick == twoClick){
+// 			for(let i=0; i<disp2D.length; i++){
+// 				for(let j=0; j<disp2D[i].length; j++){
+// 					if(img2D[i][j] == oneClick){
+// 						cvr2D[i][j] = 1;
+// 						break;
+// 					}
+// 				}
+// 			}
+// 		} else{
+// 			for(let i=0; i<disp2D.length; i++){
+// 				for(let j=0; j<disp2D[i].length; j++){
+// 					if(img2D[i][j] == oneClick){
+// 						cvr2D[i][j] = 0;
+// 					} else if(img2D[i][j] == twoClick){
+// 						cvr2D[i][j] = 0;
+// 					}
+// 				}
+// 			}
+// 		}
+// 		oneClick = null;
+// 		twoClick = null;
+// 	}
+	
+	function patchIJEvent(){
+		for(let i=0; i<4; i++){
+			for(let j=0; j<4; j++){
+				$("img").eq(i*4+j).attr("alt", i+","+j);
+			}
+		}
+		
+		$("img").bind("click", function(event) { myclick(event); });
+		
+	}
+	
+	function shuffle(){
+		
+		for(let i=0; i<100; i++){
+			var rndi = Math.floor(Math.random()*4);
+			var rndj = Math.floor(Math.random()*4);
+			var a = img2D[rndi][rndj];
+			var b = img2D[0][0];
+			img2D[0][0] = a;
+			img2D[rndi][rndj] = b;
+		}
+		
+		console.log(img2D);
+	}
+	
+// 	function shuffle(){
+// 		var arr16= [1,1,2,2,
+// 					3,3,4,4,
+// 					5,5,6,6,
+// 					7,7,8,8];
+		
+// 		for(let i=0; i<150; i++){
+// 			let ran = Math.floor(Math.random()*16);
+			
+// 			let temp = arr16[ran];
+// 			arr16[ran] = arr16[0];
+// 			arr16[0] = temp;
+// 		}
+		
+// 		for(let i=0; i<img2D.length; i++){
+// 			for(let j=0; j<img2D[i].length; j++){
+// 				img2D[i][j] = arr16[i*4+j];
+// 			}
+// 		}
+// 	}
+	
+	function render(){
+		for(let i=0; i<img2D.length; i++){
+			for(let j=0; j<img2D[i].length; j++){
+				$img.eq(i*4+j).attr("src",`/static/img/${disp2D[i][j]}.png`);
+			}
+		}
+	}
+	
+	
+	
+</script>
+</head>
+<body onload="myinit()">
+<table>
+	<tr>
+		<td>남은 개수</td>
+		<td>
+			<div id="mydisp">16</div>
+		</td>
+	</tr>
+</table>
+<table>
+	<tbody id="mytbody">
+		<tr>
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+		</tr>	                       
+		<tr>                           
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+		</tr>	                       
+		<tr>                           
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+		</tr>	                       
+		<tr>                           
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+			<td><img src="/static/img/0.png"/></td>
+		</tr>	
+	</tbody>
+</table>
+
+</body>
+</html>

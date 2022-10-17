@@ -35,13 +35,14 @@
 		var $it = $("#it");
 		for(let i=0; i<10; i++){
 			$("#btn"+i).bind("click",function(event){
-				// - 추가하기
+				// '-' 추가하기
 				let val = $it.val();
 				if(val.length == 3 || val.length == 8){
 					$it.val(function(p_inx,p_val){
 						return p_val + "-";
 					});
-				}// end if
+				}
+				
 				myclick(event);
 			});// end bind()
 		}// end for
@@ -74,19 +75,19 @@
 		</td>
 	</tr>
 	<tr>
-		<td><input type="button" id="btn1" value="1"></td>
-		<td><input type="button" id="btn2" value="2"></td>
-		<td><input type="button" id="btn3" value="3"></td>
-	</tr>
-	<tr>
-		<td><input type="button" id="btn4" value="4"></td>
-		<td><input type="button" id="btn5" value="5"></td>
-		<td><input type="button" id="btn6" value="6"></td>
-	</tr>                                          
-	<tr>                                           
-		<td><input type="button" id="btn7" value="7"></td>
-		<td><input type="button" id="btn8" value="8"></td>
-		<td><input type="button" id="btn9" value="9"></td>
+		<td><input type="button" id="btn1" value="1" /></td>
+		<td><input type="button" id="btn2" value="2" /></td>
+		<td><input type="button" id="btn3" value="3" /></td>
+	</tr>                                            
+	<tr>                                             
+		<td><input type="button" id="btn4" value="4" /></td>
+		<td><input type="button" id="btn5" value="5" /></td>
+		<td><input type="button" id="btn6" value="6" /></td>
+	</tr>                                            
+	<tr>                                             
+		<td><input type="button" id="btn7" value="7" /></td>
+		<td><input type="button" id="btn8" value="8" /></td>
+		<td><input type="button" id="btn9" value="9" /></td>
 	</tr>
 	<tr>                                           
 		<td><input type="button" id="btn0" value="0"></td>

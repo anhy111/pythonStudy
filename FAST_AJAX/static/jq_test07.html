@@ -11,42 +11,44 @@
 </style>
 <script type="text/javascript">
 	function myclick(){
-		$("#itResult").val(function(p_val){
-			let mine = $("#itMine").val();
-			let $com = $("#itCom");
-			
-			let ran = Math.random();
-			let com;
-			
-			if(ran > 0.66){
-				com = "가위";
-			} else if(ran > 0.33){
-				com = "바위";
-			} else{
-				com = "보";
-			}
-			
-			let result;
-			if(com == "가위" && mine == "바위") result = "승리" 
-			if(com == "가위" && mine == "보") result = "패배" 
-			if(com == "가위" && mine == "가위") result = "무승부" 
-			
-			if(com == "바위" && mine == "바위") result = "무승부" 
-			if(com == "바위" && mine == "보") result = "승리" 
-			if(com == "바위" && mine == "가위") result = "패배" 
-			
-			if(com == "보" && mine == "바위") result = "패배" 
-			if(com == "보" && mine == "보") result = "무승부" 
-			if(com == "보" && mine == "가위") result = "승리" 
-			
-			$com.val(com)
-			return result;
-		});
+		let mine = $("#itMine").val();
+		
+		let ran = Math.random();
+		let com;
+		
+		if(ran > 0.66){
+			com = "가위";
+		} else if(ran > 0.33){
+			com = "바위";
+		} else{
+			com = "보";
+		}
+		
+		let result;
+		if(com == "가위" && mine == "바위") result = "승리" 
+		if(com == "가위" && mine == "보") result = "패배" 
+		if(com == "가위" && mine == "가위") result = "무승부" 
+		
+		if(com == "바위" && mine == "바위") result = "무승부" 
+		if(com == "바위" && mine == "보") result = "승리" 
+		if(com == "바위" && mine == "가위") result = "패배" 
+		
+		if(com == "보" && mine == "바위") result = "패배" 
+		if(com == "보" && mine == "보") result = "무승부" 
+		if(com == "보" && mine == "가위") result = "승리" 
+		
+		$("#itCom").val(com);
+		$("#itResult").val(result);
 	}
 	
 	$(document).ready(function(){
-		$("btn").bind("click",function(){
+		$("#btn").bind("click",function(){
 			myclick();
+		});
+		$("#itMine").bind('keydown',function(e){
+			if(e.keyCode == 13){
+				myclick();
+			}
 		});
 	});
 	

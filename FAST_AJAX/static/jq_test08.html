@@ -11,20 +11,18 @@
 </style>
 <script type="text/javascript">
 	function myclick(){
-		$(".mydisp").html(function(){
-			let rf = $("input[name='rf']:checked").val();
-			let rl = $("input[name='rl']:checked").val();
-			
-			let rfNum = parseInt(rf);
-			let rlNum = parseInt(rl);
-			
-			var txt = ""
-			for(let i=rfNum; i<=rlNum; i++){
-				txt += drawStar(i);
-			}
-			
-			return txt;
-		});
+		let rf = $("input[name='rf']:checked").val();
+		let rl = $("input[name='rl']:checked").val();
+		
+		let rfNum = parseInt(rf);
+		let rlNum = parseInt(rl);
+		
+		var txt = ""
+		for(let i=rfNum; i<=rlNum; i++){
+			txt += drawStar(i);
+		}
+		
+		$(".mydisp").html(txt);
 	}
 	
 	function drawStar(p_cnt){

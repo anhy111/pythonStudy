@@ -36,20 +36,17 @@
 	}
 	
 	function myclick(){
-		$("#ta").html(function(p_inx, p_html){
-			var $mine = $("#it");
-			var mine = $mine.val();
-			var stk = strike(mine);
-			var bl = ball(mine);
-			p_html += mine +" " + stk + "S" + bl + "B\n";
-			if(stk == 3){
-				p_html += "게임종료";
-			}
-			
-			$mine.val("");
-			
-			return p_html;
-		});
+		var str_old = $("#ta").html();
+		var mine = $("#it").val();
+		var stk = strike(mine);
+		var bl = ball(mine);
+		var str_new = mine +" - " + stk + "S " + bl + "B\n";
+		if(stk == 3){
+			str_new += "게임종료";
+		}
+		
+		$("#it").val("");
+		$("#ta").html(str_old+str_new);
 	}
 	
 	function ball(p_mine){
@@ -72,10 +69,10 @@
 	}
 	
 	$(document).ready(function(){
-		$("#btn1").bind("click",function(){
+		$("#btn_strike").bind("click",function(){
 			myclick();
 		});
-		$("#btn2").bind("click",function(){
+		$("#btn_reset").bind("click",function(){
 			reset();
 		});
 	})
@@ -92,8 +89,8 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input style="width: 58%;" type="button" value="맞추기" id="btn1" />
-			<input style="width: 38%;" type="button" value="리셋" id="btn2" />
+			<input style="width: 58%;" type="button" value="맞추기" id="btn_strike" />
+			<input style="width: 38%;" type="button" value="리셋" id="btn_reset" />
 		</td>
 	</tr>
 	<tr>
