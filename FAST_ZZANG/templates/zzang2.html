@@ -6,8 +6,8 @@
 <script type="text/javascript">
 
 	var v_imgs;
-	var flag_ing = true;
 	var v_disp;
+	var flag_ing = true;
 	
 	var s1i = -1;
 	var s1j = -1;
@@ -48,7 +48,7 @@
 		v_imgs = document.querySelectorAll("img");
 		v_disp = document.querySelector("#mydisp");
 		render();
-// 		shuffle();
+		shuffle();
 		patchIJEvent();
 	}
 
@@ -149,34 +149,7 @@
 			step = 0;
 		}
 	}
-	
-	
-// 	function strike(e){
-// 		if(oneClick == twoClick){
-// 			for(let i=0; i<disp2D.length; i++){
-// 				for(let j=0; j<disp2D[i].length; j++){
-// 					if(img2D[i][j] == oneClick){
-// 						cvr2D[i][j] = 1;
-// 						break;
-// 					}
-// 				}
-// 			}
-// 		} else{
-// 			for(let i=0; i<disp2D.length; i++){
-// 				for(let j=0; j<disp2D[i].length; j++){
-// 					if(img2D[i][j] == oneClick){
-// 						cvr2D[i][j] = 0;
-// 					} else if(img2D[i][j] == twoClick){
-// 						cvr2D[i][j] = 0;
-// 					}
-// 				}
-// 			}
-// 		}
-// 		oneClick = null;
-// 		twoClick = null;
-// 	}
-	
-	
+
 	function patchIJEvent(){
 		for(let i=0; i<4; i++){
 			for(let j=0; j<4; j++){
@@ -189,38 +162,16 @@
 		
 	}
 	
-// 	function shuffle(){
-		
-// 		for(let i=0; i<100; i++){
-// 			var rndi = Math.floor(Math.random()*4);
-// 			var rndj = Math.floor(Math.random()*4);
-// 			var a = img2D[rndi][rndj];
-// 			var b = img2D[0][0];
-// 			img2D[0][0] = a;
-// 			img2D[rndi][rndj] = b;
-// 		}
-// 		console.log(img2D);
-// 	}
-	
 	function shuffle(){
-		var arr16= [1,1,2,2,
-					3,3,4,4,
-					5,5,6,6,
-					7,7,8,8];
-		
-		for(let i=0; i<150; i++){
-			let ran = Math.floor(Math.random()*16);
-			
-			let temp = arr16[ran];
-			arr16[ran] = arr16[0];
-			arr16[0] = temp;
+		for(let i=0; i<100; i++){
+			var rndi = Math.floor(Math.random()*4);
+			var rndj = Math.floor(Math.random()*4);
+			var a = img2D[rndi][rndj];
+			var b = img2D[0][0];
+			img2D[0][0] = a;
+			img2D[rndi][rndj] = b;
 		}
-		
-		for(let i=0; i<img2D.length; i++){
-			for(let j=0; j<img2D[i].length; j++){
-				img2D[i][j] = arr16[i*4+j];
-			}
-		}
+		console.log(img2D);
 	}
 	
 	function render(){
@@ -230,9 +181,6 @@
 			}
 		}
 	}
-	
-	
-	
 	
 </script>
 </head>
