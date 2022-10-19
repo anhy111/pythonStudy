@@ -35,16 +35,25 @@ async def root(request: Request):
     return templates.TemplateResponse("socket.html", {"request": request})
 
 
+@app.get("/card")
+async def card(request: Request):
+    return templates.TemplateResponse("card.html", {"request": request})
+
+
 @app.websocket("/ws/{client_id}")
 async def websocket_endpoint(websocket: WebSocket, client_id: int):
     await manager.connect(websocket)
     try:
         while True:
             data = await websocket.receive_text()
-            await manager.send_personal_message(f"You wrote: {data}", websocket)
-            await manager.broadcast(f"Client #{client_id} says: {data}")
+            print("data:",data)
+            await manager.broadcast(data)
     except WebSocketDisconnect:
         manager.disconnect(websocket)
-        await manager.broadcast(f"Client #{client_id} left the chat")
+        await manager.broadcast(f"error")
         
-# uvicorn mysocket:app --reload --host 0.0.0.0
+def division(data):
+    strArr = data.split(":")
+    if strArr[0] == "ready":
+        pass
+# uvicorn mysocket:app --reload --host 192.168.142.15
